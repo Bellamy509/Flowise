@@ -1,20 +1,23 @@
 name: Test Docker Build
 
 on:
-    push:
-        branches:
-            - main
-
-    pull_request:
-        branches:
-            - '*'
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - '*'
 
 jobs:
-    build:
-        runs-on: ubuntu-latest
-        env:
-            PUPPETEER_SKIP_DOWNLOAD: true
-        steps:
-            - uses: actions/checkout@v3
+  build:
+    runs-on: ubuntu-latest
+    env:
+      PUPPETEER_SKIP_DOWNLOAD: true
 
-            - run: docker build --no-cache -t flowise .
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Build Docker Image
+        run: docker build --no-cache -t flowise .
+
